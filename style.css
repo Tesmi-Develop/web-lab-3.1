@@ -68,26 +68,58 @@ img {
 }
 
 .card-container {
-    display: flex;
-    gap: 5px;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: repeat(4, max-content);
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 8px;
 }
 
-.row-mini-cards {
-    display: flex;
-    justify-content: space-evenly;
+.card-container > .top-left {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.card-container > .top-right {
+    grid-row: 1;
+    grid-column: 6;
+}
+
+.card-container > .middle-left {
+    grid-row: 2 / span 2;
+    grid-column: 1 / span 2;
+}
+
+.card-container > .middle {
+    grid-row: 2 / span 2;
+    grid-column: 4 / span 2;
+}
+
+.card-container > .middle-right {
+    grid-row: 2 / span 2;
+    grid-column: 7 / span 2;
+}
+
+.card-container > .bottom-left {
+    grid-row: 4;
+    grid-column: 3;
+}
+
+.card-container > .bottom-right {
+    grid-row: 4;
+    grid-column: 6;
+}
+
+.border {
+    border: 1px solid #c9c0ba;
+    border-radius: 16px;
 }
 
 .mini-card {
     display: flex;
-    width: 140px;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     padding: 12px 10px;
-    border: 1px solid #c9c0ba;
-    border-radius: 16px;
 }
 
 .mini-card-image {
@@ -101,20 +133,12 @@ img {
     font-weight: bold;
 }
 
-.row-cards {
-    display: flex;
-    justify-content: space-around;
-    gap: 8px;
-}
-
 .card {
     display: flex;
-    flex-basis: 280px;
     flex-direction: column;
     justify-content: space-between;
-    padding: 12px 10px;
-    border-radius: 16px;
     gap: 8px;
+    padding: 12px 10px;
 }
 
 .card-main-content {
@@ -157,17 +181,21 @@ footer {
 }
 
 @media (width <= 900px) {
-    .menu {
-        flex-wrap: wrap;
+    .content {
+        margin: 0 clamp(10px, 4vw, 40px);
+        gap: clamp(10px, 2vw, 15px);
     }
 
-    .menu-item {
-        flex: 1 1 40%;
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
     }
 
     .gallery {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 120px);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(5px, 1.5vw, 10px);
     }
 
     .gallery > .gallery-item-left-side,
@@ -177,15 +205,25 @@ footer {
         grid-column: auto;
     }
 
-    .row-mini-cards,
-    .row-cards {
+    .card-container {
+        display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: clamp(8px, 2vw, 16px);
     }
 
     .mini-card,
     .card {
-        width: clamp(260px, 85vw, 340px);
+        width: clamp(260px, 85vw, 450px);
+        padding: clamp(10px, 2.5vw, 16px);
+        flex-basis: auto;
+    }
+
+    .card-title {
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
+    .card-text {
+        font-size: clamp(14px, 3.5vw, 16px);
     }
 }
